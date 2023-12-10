@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# CSV-Reader SPA (React.js)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Этот проект представляет собой Single Page Application (SPA) для просмотра данных из CSV-файла. Приложение имеет два экрана: главный экран для загрузки файла и экран просмотра данных в виде таблицы.
 
-## Available Scripts
+## Функциональность
 
-In the project directory, you can run:
+### 1. Главный экран (загрузка)
 
-### `npm start`
+На главном экране расположен блок с текстом "Выберите файл в формате CSV" и кнопкой "Выберите файл". При нажатии на кнопку "Выберите файл" открывается окно выбора файла ОС.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+При выборе файла в формате .CSV происходит выбор данных из файла, и пользователь перенаправляется на следующий экран. Если выбран файл не в формате .CSV, отображается сообщение об ошибке: "Неправильный формат файла, разрешены только файлы .CSV".
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 2. Экран просмотра данных (таблица)
 
-### `npm test`
+На экране просмотра отображается кнопка "Загрузить новый файл" и таблица с данными. Данные вставляются в таблицу из загруженного на первом экране файла, сопоставляя поля следующим образом:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Поле в файле | Поле в экране просмотра |
+|--------------|------------------------|
+| name         | Имя                    |
+| phone        | Номер телефона         |
+| email        | Email                  |
+| bday         | Дата рождения          |
+| address      | Адрес                  |
 
-### `npm run build`
+Данные сохраняются в браузере (LocalStorage/IndexedDB), чтобы после обновления страницы оставаться на месте. Если данные уже сохранены, экран с таблицей открывается сразу, пропуская экран загрузки.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+При нажатии на кнопку "Загрузить новый файл", данные в браузере очищаются, и пользователь перенаправляется на главный экран.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Технологии
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **React.js / TypeScript:** Использованы для создания компонентов и управления состоянием приложения.
 
-### `npm run eject`
+2. **CSS** Применены для стилизации пользовательского интерфейса и обеспечения приятного визуального восприятия.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Инструкции по запуску
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Установите зависимости с помощью `npm install`.
+2. Запустите приложение с помощью `npm start`.
+3. Откройте [http://localhost:3000](http://localhost:3000) в вашем браузере.
