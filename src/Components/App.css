@@ -76,7 +76,8 @@
     align-items: center;
     justify-content: center;
     align-self: flex-end;
-    margin-top: 10px; /* Adjust the margin as needed */
+    margin-top: 10px;
+    /* Adjust the margin as needed */
     margin-right: 10px;
 }
 
@@ -89,9 +90,11 @@
 }
 
 .table-container {
-    margin-top: 10px; /* Adjust the margin as needed */
+    margin-top: 10px;
+    /* Adjust the margin as needed */
     align-self: flex-end;
-    width: calc(100% - 33px); /* 100% width minus the left margin of the table */
+    width: calc(100% - 33px);
+    /* 100% width minus the left margin of the table */
 }
 
 .table {
@@ -109,6 +112,10 @@ th {
     font-weight: normal;
 }
 
+tr.active {
+    background-color: rgba(99, 70, 180, 0.25);
+}
+
 td {
     height: 51px;
     text-align: left;
@@ -120,11 +127,10 @@ td {
     margin-left: 35px;
 }
 
-.t__text{
+.t__text {
     margin-left: 35px;
     font-size: 14px;
 }
-
 
 .name-address {
     width: 25%;

@@ -1,15 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useRef, useState } from 'react';
-import Papa from 'papaparse'
+import { useRef,useState } from 'react';
+import { displayCustomAlert,parseCSV } from "../utils";
 import './App.css';
-
-const CustomAlert = ({ message }) => {
-    return (
-        <div className="alert">
-            <div className="alert__title">{message}</div>
-        </div>
-    );
-};
 
 function App() {
     const fileInputRef = useRef(null);
@@ -22,38 +14,16 @@ function App() {
         if (file && file.name.endsWith('.csv')) {
             try {
                 let info = await parseCSV(file);
+                localStorage.setItem('csvData', JSON.stringify(info));
                 console.log(info);
                 navigate("/tableview");
             } catch (error) {
                 console.error('Error parsing CSV:', error);
-                displayCustomAlert('Error parsing CSV');
+                displayCustomAlert('Error parsing CSV', setCustomAlert);
             }
         } else {
-            displayCustomAlert('Неправильный формат файла, разрешены только файлы .CSV');
+            displayCustomAlert('Неправильный формат файла, разрешены только файлы .CSV', setCustomAlert);
         }
-
-    };
-
-    // библиотека для парсинга csv to json
-    function parseCSV(file) {
-        return new Promise((resolve, reject) => {
-            Papa.parse(file, {
-                complete: function (results) {
-                    resolve(results.data);
-                },
-                error: function (error) {
-                    reject(error);
-                },
-                encoding: "Windows-1251", // кодировка для русских символов
-            });
-        });
-    }
-
-    const displayCustomAlert = (message) => {
-        setCustomAlert(<CustomAlert message={message} />);
-        setTimeout(() => {
-            setCustomAlert(null);
-        }, 3000);
     };
 
     // имитирует клик на реальный инпут
@@ -63,7 +33,7 @@ function App() {
 
     return (
         <div className='page'>
-            {customAlert}
+      {customAlert}
             <div className='container'>
                 <div className='container-input'>
                     <div>
