@@ -1,6 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { useNavigate } from "react-router-dom";
-import { handleFileUpload } from '../utils/utils.js';
+import React, { useEffect, useState, useCallback } from 'react';
 import './App.css'
 
 function TablePage() {
