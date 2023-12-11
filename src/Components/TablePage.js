@@ -6,9 +6,6 @@ import './App.css'
 function TablePage() {
     const [data, setData] = useState([]);
     const [activeRow, setActiveRow] = useState(null);
-    const [customAlert, setCustomAlert] = useState(null);
-    const fileInputRef = useRef(null);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const localStorageData = JSON.parse(localStorage.getItem('csvData')) || [];
@@ -28,7 +25,6 @@ function TablePage() {
 
     return (
         <div className='page-table-view'>
-            {customAlert}
             <button className='btn btn-table' onClick={handleButtonClick}>
                 <div className='btn__title'>
                     Загрузить новый файл
