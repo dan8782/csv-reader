@@ -31,13 +31,14 @@
 1. **Components:**
    - `App`: Главный экран.
    - `TablePage`: Таблица с данными.
+   - `CustomAlert`: Кастомный алерт 
+   - `displayAlert.js` - ф-я показывает алерт на 3 сек
 
 2. **Routes:**
    - `router.js`: Использую библиотеку react-dom-router v6, маршрутизация приложения.
 
 3. **Utils:**
    - `/parse/parseCsv.js`: Утилита для парсинга CSV-файлов.
-   - `/ui/displayAlert.js`: Показывает алерт, если файл неккоректный.
    - `handleFileUpload.js`: Утилита для обработки загрузки файлов.
 
 4. **Точка входа:**

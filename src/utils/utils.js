@@ -1,5 +1,5 @@
 import { parseCSV } from "./parse/parseCsv";
-import { displayCustomAlert } from "./ui/displayAlert";
+import { displayCustomAlert } from "../Components/displayAlert";
 
 export const handleFileUpload = async (file, fileInputRef, setCustomAlert, navigate) => {
     fileInputRef.current.value = '';
