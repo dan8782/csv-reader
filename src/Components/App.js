@@ -8,7 +8,6 @@ function App() {
     const navigate = useNavigate();
     const [customAlert, setCustomAlert] = useState(null);
 
-
     // чтобы функция не создавалась при каждом рендере
     const handleFileChange = useCallback(async (event) => {
         const file = event.target.files?.[0];

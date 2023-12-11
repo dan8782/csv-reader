@@ -15,18 +15,15 @@ function TablePage() {
         setData(localStorageData.slice(1)); //slice убирает первую строку с хедером(name,phone etc)
     }, []);
 
-    async function handleFileChange(event) {
-        const file = event.target.files?.[0];
-        await handleFileUpload(file, fileInputRef, setCustomAlert, navigate);
-    };
-
     // подсветка по кликнутой строке + юзаем хук usecallback чтобы не пересоздавать функцию
     const handleClick = useCallback((index) => {
         setActiveRow(index);
     }, []);
 
+    // перезагрузка активирует loader который сам перенаправит на '/' рут
     const handleButtonClick = () => {
-        fileInputRef.current.click();
+        localStorage.setItem('csvData',[]);
+        window.location.reload();
     };
 
     return (
@@ -37,12 +34,6 @@ function TablePage() {
                     Загрузить новый файл
                 </div>
             </button>
-            <input
-                type="file"
-                onChange={handleFileChange}
-                ref={fileInputRef}
-                style={{ display: 'none' }}
-            />
             <div className="table-container">
                 <table className="table">
                     <thead>
