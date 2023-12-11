@@ -1,5 +1,5 @@
-import App from "./Components/App";
-import TablePage from "./Components/TablePage";
+import App from "../Components/App";
+import TablePage from "../Components/TablePage";
 import {
     createBrowserRouter, redirect,
 } from "react-router-dom";
@@ -29,11 +29,10 @@ function checkTable() {
 }
 
 function protectView() {
-    const csvData = localStorage.getItem('csvData');// loader: checkTable,
+    const csvData = localStorage.getItem('csvData');
     if (!csvData || JSON.parse(csvData).length < 1) {
         return redirect('/');
     }else{
         return null;
     }
-    
 }

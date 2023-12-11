@@ -1,6 +1,6 @@
-import React, {useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useNavigate } from "react-router-dom";
-import { handleFileUpload } from '../utils';
+import { handleFileUpload } from '../utils/utils.js';
 import './App.css'
 
 function TablePage() {
@@ -10,35 +10,20 @@ function TablePage() {
     const fileInputRef = useRef(null);
     const navigate = useNavigate();
 
-    const handleFileChange = handleFileUpload(fileInputRef, setCustomAlert, navigate);
-
     useEffect(() => {
         const localStorageData = JSON.parse(localStorage.getItem('csvData')) || [];
         setData(localStorageData.slice(1)); //slice убирает первую строку с хедером(name,phone etc)
     }, []);
 
-    // подсветка по кликнутой строке
-    function handleClick(index) {
-        setActiveRow(index);
-    }
+    async function handleFileChange(event) {
+        const file = event.target.files?.[0];
+        await handleFileUpload(file, fileInputRef, setCustomAlert, navigate);
+    };
 
-    // async function handleFileChange(event) {
-    //     const file = event.target.files?.[0];
-    //     fileInputRef.current.value = ''; // TODO УБРАТЬ ЭТО ГОВНО!!!!!!!
-    //     if (file && file.name.endsWith('.csv')) {
-    //         try {
-    //             let info = await parseCSV(file);
-    //             localStorage.setItem('csvData', JSON.stringify(info));
-    //             console.log(info);
-    //             navigate("/tableview");
-    //         } catch (error) {
-    //             console.error('Error parsing CSV:', error);
-    //             displayCustomAlert('Error parsing CSV', setCustomAlert);
-    //         }
-    //     } else {
-    //         displayCustomAlert('Неправильный формат файла, разрешены только файлы .CSV', setCustomAlert);
-    //     }
-    // };
+    // подсветка по кликнутой строке + юзаем хук usecallback чтобы не пересоздавать функцию
+    const handleClick = useCallback((index) => {
+        setActiveRow(index);
+    }, []);
 
     const handleButtonClick = () => {
         fileInputRef.current.click();
@@ -46,18 +31,18 @@ function TablePage() {
 
     return (
         <div className='page-table-view'>
-                        {customAlert}
+            {customAlert}
             <button className='btn btn-table' onClick={handleButtonClick}>
                 <div className='btn__title'>
                     Загрузить новый файл
                 </div>
             </button>
             <input
-                        type="file"
-                        onChange={handleFileChange}
-                        ref={fileInputRef}
-                        style={{ display: 'none' }}
-                    />
+                type="file"
+                onChange={handleFileChange}
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+            />
             <div className="table-container">
                 <table className="table">
                     <thead>
@@ -71,7 +56,11 @@ function TablePage() {
                     </thead>
                     <tbody>
                         {data.map((row, index) => (
-                            <tr key={index} onClick={() => handleClick(index)} className={activeRow === index ? 'active' : ''}>
+                            <tr
+                                key={index}
+                                onClick={() => handleClick(index)}
+                                className={activeRow === index ? 'active' : ''}
+                            >
                                 <td className="name-address">
                                     <div className='t__text'>
                                         {row[0]}

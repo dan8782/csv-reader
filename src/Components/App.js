@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useRef,useState } from 'react';
-import { handleFileUpload } from "../utils";
+import { useRef,useState,useCallback } from 'react';
+import { handleFileUpload } from "../utils/utils.js";
 import './App.css';
 
 function App() {
@@ -8,7 +8,12 @@ function App() {
     const navigate = useNavigate();
     const [customAlert, setCustomAlert] = useState(null);
 
-    const handleFileChange = handleFileUpload(fileInputRef, setCustomAlert, navigate);
+
+    // чтобы функция не создавалась при каждом рендере
+    const handleFileChange = useCallback(async (event) => {
+        const file = event.target.files?.[0];
+        await handleFileUpload(file, fileInputRef, setCustomAlert, navigate);
+    }, [fileInputRef, setCustomAlert, navigate]);
 
     // имитирует клик на реальный инпут
     const handleButtonClick = () => {
